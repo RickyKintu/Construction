@@ -1,0 +1,45 @@
+/* Fade-in Animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Slightly move content up */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide-in Animation */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px); /* Move content from left */
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Initial Hidden State */
+.scroll-effect {
+    opacity: 0;
+    transform: translateY(20px); /* Move content slightly down */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    will-change: opacity, transform;
+}
+
+/* When in View */
+.scroll-effect.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Slide-in Specific */
+.slide-in {
+    transform: translateX(-50px); /* Initial move from left */
+}
+.slide-in.visible {
+    transform: translateX(0);
+}
