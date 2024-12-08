@@ -85,7 +85,7 @@ img {
     padding: 0.5rem;
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 11;
     text-align: center;
 }
 .navbar ul {
@@ -213,7 +213,7 @@ img {
     border: none;
     padding: 1rem;
     cursor: pointer;
-    z-index: 10;
+    z-index: 2;
 }
 .prev {
     left: 10px;
@@ -460,7 +460,11 @@ img {
     color: #777;
     margin-bottom: 40px;
 }
-
+.apartment-page {
+    background-color: #f8f8f8; /* Specific to the apartment page */
+    color: #333;
+    padding: 0 100px 20px 100px;
+}
 .apartments-gallery {
     justify-content: center; /* Center items */
     display: flex;
@@ -548,7 +552,7 @@ img {
     padding: 5px 30px; /* Adjusted padding for balance */
     transform: rotate(-45deg); /* Diagonal rotation */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    z-index: 10;
+    z-index: 2;
     text-align: center;
     letter-spacing: 1px; /* Clean, modern spacing */
 }
@@ -722,3 +726,773 @@ footer {
         padding: 0.5rem;
     }
 }
+
+/* Apartment Page Styles */
+.apartment-page {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8; /* Apartment-specific background */
+    color: #333;
+}
+
+/* Apartment Header */
+.apartment-page .apartment-header {
+    text-align: center;
+    background-color: #8f94fb; /* Matches the theme colors */
+    color: white;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+.apartment-page .apartment-header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.apartment-page .apartment-header p {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+}
+
+/* Gallery and Quick Info Section */
+.apartment-page .gallery-info-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: flex-start;
+    max-width: 90%;
+    margin: 2rem auto;
+}
+
+/* Thumbnails Vertical Section */
+.apartment-page .thumbnails {
+    min-width: 89px;
+    display: flex;
+    flex-direction: column; /* Arrange thumbnails vertically */
+    gap: 10px;
+    align-items: center;
+    overflow-y: hidden; /* Prevent overflow issues */
+    overflow-x: hidden;
+    max-height: 600px; /* Limit height */
+    position: relative; /* Ensure proper stacking context */
+    padding: 10px 0; /* Add padding to give space for hover effects */
+}
+
+/* Thumbnail Styling */
+.apartment-page .thumbnails img {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s, border 0.3s;
+    border: 2px solid transparent; /* Default border */
+    box-sizing: border-box;
+}
+
+/* Hover Effect */
+.apartment-page .thumbnails img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 2; /* Ensure it appears above other elements */
+}
+
+/* Active Thumbnail */
+.apartment-page .thumbnails img.active {
+    border: 2px solid #8f94fb; /* Purple border for active thumbnail */
+    transform: scale(1.1); /* Slight zoom effect */
+}
+
+/* Adjusting container to prevent clipping */
+.apartment-page .thumbnails:hover {
+    overflow-y: visible; /* Temporarily allow overflow on hover */
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .apartment-page .thumbnails img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+
+
+.apartment-page .main-image {
+    position: relative;
+    max-width: 50%; /* Allow space for quick info */
+    text-align: center;
+}
+
+.apartment-page .main-image img {
+    max-width: 100%;
+    max-height: 500px; /* Restrict height */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.apartment-page #image-label {
+    position: absolute;
+    bottom: 10px; /* Adjust position from the bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Ensure true center alignment */
+    background-color: rgba(0, 0, 0, 0.7); /* Black background with transparency */
+    color: #8f94fb; /* Theme purple for text */
+    padding: 5px 15px; /* Add padding for better readability */
+    border-radius: 20px; /* Rounded background */
+    font-size: 1rem; /* Adjust font size */
+    font-weight: bold; /* Make text stand out */
+    text-align: center; /* Center the text */
+    max-width: 80%; /* Optional: Limit the label width */
+    overflow: hidden; /* Prevent text overflow */
+    white-space: nowrap; /* Ensure label stays on one line */
+    text-overflow: ellipsis; /* Add ellipsis if text overflows */
+}
+
+/* Quick Info and Map Container */
+.quick-info-container {
+    min-width: 250px;
+    max-width: 250px;
+    display: flex; /* Flex container for horizontal alignment */
+    flex-direction: column; /* Stack children vertically */
+    gap: 20px; /* Space between quick-info and map */
+    flex: 1; /* Make it responsive */
+}
+
+
+/* Quick Info Section */
+.apartment-page .quick-info {
+    max-width: 100%;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.6;
+    position: sticky; /* Sticks when scrolling */
+    top: 20px;
+    z-index: 1;
+    transition: top 0.3s ease-in-out;
+}
+
+.apartment-page .quick-info h2 {
+    font-size: 1.8rem;
+    color: #8f94fb; /* Theme color */
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.apartment-page .quick-info p {
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.apartment-page .quick-info p i {
+    margin-right: 10px; /* Space between icon and text */
+    color: #8f94fb; /* Icon color */
+}
+
+.apartment-page .quick-info p strong {
+    margin-right: 5px; /* Space between <strong> and the following text */
+    font-weight: bold; /* Ensure <strong> text stands out */
+}
+
+.apartment-page .quick-info p span {
+    margin-left: 1px; /* Additional space if needed for spans */
+}
+
+
+
+/* Map Section */
+.apartment-page #map {
+    height: 235px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0; /* Prevent shrinking of the map */
+    max-width: 100%;
+    z-index: 0;
+}
+
+
+/* Details Section */
+.apartment-page .details-section {
+    margin: 2rem 2rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    line-height: 1.4;
+
+}
+
+.apartment-page .details-section h2 {
+    font-size: 2rem;
+    color: #8f94fb;
+    margin-bottom: 1rem;
+}
+
+.apartment-page .details-section ul {
+    margin: 1rem 0;
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.apartment-page .details-section ul li {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .apartment-page .gallery-info-container {
+        flex-direction: column; /* Stack vertically */
+        gap: 1rem;
+    }
+
+    .apartment-page .quick-info {
+        max-width: 100%; /* Full width on smaller screens */
+        text-align: center;
+    }
+
+    .apartment-page .main-image img {
+        max-height: 300px; /* Adjust for smaller screens */
+    }
+
+    .apartment-page .thumbnails img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+
+.bookings {
+    padding: 2rem;
+    background: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 2rem 0;
+}
+
+.bookings h2 {
+    color: #8f94fb;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.bookings p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* Showings Section */
+.bookings .showings {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bookings .showings h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.bookings .showing {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    background: white;
+    gap: 1rem;
+}
+
+.bookings .title-info {
+    min-width: 250px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bookings .title-info h4 {
+    font-size: 1.5rem;
+    color: #8f94fb; /* Theme color */
+    margin: 0;
+}
+
+.bookings .title-info .info-btn {
+    background-color: transparent;
+    color: #8f94fb;
+    border: 1px solid #8f94fb;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.bookings .title-info .info-btn::after {
+    content: attr(data-tooltip); /* Use data-tooltip for the tooltip text */
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    white-space: pre-wrap;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    opacity: 0; /* Initially hidden */
+    visibility: hidden; /* Initially hidden */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+    min-width: 150px;
+}
+
+.bookings .title-info .info-btn:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.title-info .info-btn::before {
+    content: "";
+    position: absolute;
+    top: 115%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #8f94fb transparent transparent transparent;
+    opacity: 0; /* Initially hidden */
+    visibility: hidden; /* Initially hidden */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.title-info .info-btn:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+.bookings .details {
+    width: 50%;
+    display: flex;
+    align-items: center; /* Vertically center items */
+    justify-content: space-between; /* Space between each item */
+    gap: 8px; /* Add spacing between elements */
+    margin: 0.5rem 0; /* Add some margin for spacing */
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Styling for icons in the details */
+.bookings .details i {
+    color: #8f94fb; /* Theme color for the icons */
+    font-size: 1.2rem;
+}
+
+.bookings .details .date,
+.bookings .details .time,
+.bookings .details .host {
+    margin: 0; /* Remove extra margin */
+    flex: 1; /* Allow items to grow/shrink equally */
+    text-align: left; /* Align text to the left */
+}
+
+.bookings .showing .book-btn {
+    background-color: #8f94fb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.bookings .showing .book-btn:hover {
+    background-color: #6f74e5; /* Darker theme color on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .showing {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .showing .book-btn {
+        margin: 0.5rem 0;
+        width: 100%; /* Full width for buttons on small screens */
+    }
+}
+
+.brokers {
+    background-color: #8f94fb; /* Theme purple */
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #fff; /* White text for contrast */
+    margin-top: 2rem;
+}
+
+.brokers h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+.broker-cards {
+    display: flex;
+    flex-wrap: wrap; /* Allow stacking on smaller screens */
+    gap: 1.5rem;
+    justify-content: center; /* Center-align cards */
+}
+
+.broker-card {
+    display: flex;
+    flex: 1 1 calc(50% - 2rem); /* Allow two cards per row for medium screens */
+    background: #fff; /* Card background */
+    color: #333; /* Text color */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    max-width: 600px;
+    min-width: 280px; /* Ensure cards don't get too small */
+}
+
+.broker-card img {
+    max-width: 300px;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.6s ease; /* Smooth hover effect for image rotation */
+}
+
+.broker-card:hover img {
+    transform: rotateY(180deg); /* Horizontal flip effect */
+}
+
+.broker-details {
+    width: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.broker-details h4 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #8f94fb; /* Theme color for the name */
+}
+
+.broker-details .role {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    color: #555;
+}
+
+.broker-details p {
+    margin: 0.2rem 0;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+}
+
+.broker-details i {
+    color: #8f94fb; /* Theme purple for icons */
+    font-size: 1.2rem;
+}
+
+.broker-details a {
+    color: #8f94fb; /* Theme color for links */
+    text-decoration: none;
+}
+
+.broker-details a:hover {
+    text-decoration: underline;
+}
+
+
+/* Fullscreen Gallery Styles */
+.gallery-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    overflow: hidden; /* Hide scrollbars */
+}
+
+.gallery-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.gallery-modal .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    color: #fff;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.3s;
+}
+
+.gallery-modal .close-btn:hover {
+    transform: rotate(90deg);
+}
+
+.gallery-modal .gallery-images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.5s ease-in-out;
+    overflow: hidden;
+}
+
+.gallery-modal .gallery-images img {
+    position: absolute;
+    transition: transform 0.5s ease, opacity 0.5s ease, z-index 0.5s ease;
+    transform-origin: center;
+    cursor: pointer;
+}
+
+
+.gallery-modal .gallery-images img.focused {
+    opacity: 1;
+    transform: scale(1) translateX(0); /* Focused image is at the center */
+    filter: blur(0);
+    z-index: 10;
+}
+
+.gallery-modal .gallery-images img.left {
+    transform: scale(0.8) translateX(-100px); /* Position left image slightly to the left */
+    z-index: 5; /* Lower z-index than the focused image */
+}
+
+.gallery-modal .gallery-images img.right {
+    transform: scale(0.8) translateX(100px); /* Position right image slightly to the right */
+    z-index: 5; /* Lower z-index than the focused image */
+}
+
+
+
+/* Fullscreen Button */
+#fullscreen-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+    z-index: 10;
+}
+
+#fullscreen-btn:hover {
+    transform: scale(1.2);
+}
+
+/* Position Indicator */
+.position-indicator {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+/* Scoped Arrow Buttons for Modal */
+.gallery-modal .arrow-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    visibility: hidden;
+}
+
+/* Scoped Left Arrow */
+.gallery-modal .left-arrow {
+    left: 20px;
+}
+
+/* Scoped Right Arrow */
+.gallery-modal .right-arrow {
+    right: 20px;
+}
+
+/* Show arrows when gallery-modal is active */
+.gallery-modal.active .arrow-btn {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+}
+
+/* Hide arrows after 3 seconds */
+.gallery-modal.active .arrow-btn.fade {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+/* Hover Effect for Modal Arrows */
+.gallery-modal .arrow-btn:hover {
+    background: rgba(255, 255, 255, 0.7);
+    color: #000;
+}
+
+.back-button {
+    margin: 20px;
+}
+
+.back-button .btn {
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    position:absolute;
+    top:10px;
+    left:10px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button .btn:hover {
+    background-color: #4e54c8;
+    transform: translateY(-2px);
+}
+
+
+/* Responsive Styles */
+
+@media (max-width: 1250px) {
+    .broker-card img {
+        max-width:200px;
+    }
+
+}
+
+@media (max-width: 1024px) {
+    .broker-card {
+        flex: 1 1 calc(100% - 2rem); /* Single card per row for medium screens */
+    }
+    .broker-card img {
+        max-width:250px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .broker-cards {
+        flex-direction: column; /* Stack cards vertically */
+    }
+
+    .broker-card {
+        flex-direction: row; /* Stack image and details vertically */
+    }
+
+    .broker-card img {
+        width: 50%;
+        max-width:100%;
+    }
+
+    .broker-details {
+        width: 50%;
+    }
+
+}
+
+
+
+@media (max-width: 600px) {
+    .broker-cards {
+        flex-direction: column; /* Stack cards vertically */
+        
+        
+    }
+
+    .broker-card {
+        flex-direction: column; /* Stack image and details vertically */
+        min-width: 100px;
+    }
+
+    .broker-card img {
+        width: 100%;
+        max-width:none;
+    }
+
+    .broker-details,.broker-details p {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+}
+

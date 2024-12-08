@@ -1,7 +1,9 @@
 <?php
 function construction_theme_setup() {
     register_nav_menus(array(
-        'primary' => __('Primary Menu', 'construction-theme'),
+        'primary'        => __('Primary Menu', 'construction-theme'),
+        'project-menu'   => __('Project Menu', 'construction-theme'),
+        'apartment-menu' => __('Apartment Menu', 'construction-theme'),
     ));
 }
 add_action('after_setup_theme', 'construction_theme_setup');
@@ -73,6 +75,66 @@ function register_projects_cpt() {
 }
 add_action('init', 'register_projects_cpt');
 add_theme_support('post-thumbnails');
+
+function project_meta_boxes($meta_boxes) {
+    $meta_boxes[] = array(
+        'id' => 'project_details',
+        'title' => 'Project Details',
+        'post_types' => array('project'),
+        'fields' => array(
+            array(
+                'name' => 'Constructor Name',
+                'id' => 'constructor_name',
+                'type' => 'text',
+            ),
+            array(
+                'name' => 'Start Date',
+                'id' => 'start_date',
+                'type' => 'date',
+            ),
+            array(
+                'name' => 'End Date',
+                'id' => 'end_date',
+                'type' => 'date',
+            ),
+            array(
+                'name' => 'Construction Images',
+                'id' => 'construction_images',
+                'type' => 'image_advanced',
+                'max_file_uploads' => 10,
+            ),
+        ),
+    );
+    return $meta_boxes;
+}
+add_filter('rwmb_meta_boxes', 'project_meta_boxes');
+
+
+
+function enqueue_single_project_styles() {
+    if (is_singular('project')) { // Only load for single project pages
+        wp_enqueue_style(
+            'single-project-style',
+            get_template_directory_uri() . '/assets/css/single-project.css',
+            array(),
+            '1.0'
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_single_project_styles');
+
+function enqueue_gallery_script() {
+    if (is_singular('project')) { // Load only on single project pages
+        wp_enqueue_script(
+            'gallery-script',
+            get_template_directory_uri() . '/assets/js/gallery.js',
+            array(),
+            '1.0',
+            true // Load in the footer
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_gallery_script');
 
 
 // Add Customizer settings for main projects
@@ -592,6 +654,25 @@ function apartment_meta_boxes($meta_boxes) {
                     'sold' => __('Sold', 'construction-theme'),
                 ),
                 'desc' => __('Set the sale status'),
+            ), 
+            array(
+                'name' => __('Apartment Gallery', 'construction-theme'),
+                'id' => 'apartment_gallery',
+                'type' => 'image_advanced',
+                'max_file_uploads' => 10,
+                'desc' => __('Upload additional images for the apartment gallery.'),
+            ),
+            array(
+                'name' => __('Latitude', 'construction-theme'),
+                'id' => 'apartment_latitude',
+                'type' => 'text',
+                'desc' => __('Enter the latitude for the apartment location.'),
+            ),
+            array(
+                'name' => __('Longitude', 'construction-theme'),
+                'id' => 'apartment_longitude',
+                'type' => 'text',
+                'desc' => __('Enter the longitude for the apartment location.'),
             ),
         ),
     );
@@ -655,8 +736,42 @@ function apartment_customizer($wp_customize) {
 }
 add_action('customize_register', 'apartment_customizer');
 
+function enqueue_apartment_scripts() {
+    if (is_singular('apartment')) { // Only load for single apartment pages
+        wp_enqueue_script(
+            'apartment-page-script',
+            get_template_directory_uri() . '/assets/js/apartment-page.js',
+            array(),
+            '1.0',
+            true // Load in the footer
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_apartment_scripts');
+
+function enqueue_leaflet() {
+    wp_enqueue_style('leaflet-css', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
+    wp_enqueue_script('leaflet-js', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', array(), null, true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_leaflet');
+
+function enqueue_leaflet_map_script() {
+    wp_enqueue_script('leaflet-map', get_template_directory_uri() . '/assets/js/leaflet-map.js', array('leaflet-js'), null, true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_leaflet_map_script');
 
 
+function enqueue_project_styles() {
+    if (is_post_type_archive('project')) { // Only load for projects archive page
+        wp_enqueue_style(
+            'projects-style',
+            get_template_directory_uri() . '/assets/css/projects.css',
+            array(),
+            '1.0'
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_project_styles');
 
 
 

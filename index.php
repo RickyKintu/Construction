@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php bloginfo('name'); ?> - <?php bloginfo('description'); ?></title>
-    <link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>">
-    <?php wp_head(); ?>
-</head>
-<body>
+<?php get_header(); ?>
+
     <!-- Hero Section -->
     <header class="hero">
     <div class="overlay"></div>
@@ -36,8 +28,8 @@
     </nav>
 
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
+   <!-- Projects Section -->
+<section id="projects" class="projects">
     <h2 class="section-title scroll-effect">Our Projects</h2>
     <div class="gallery scroll-effect fade-in">
         <?php
@@ -53,9 +45,12 @@
                 setup_postdata($post);
         ?>
                 <div class="card fade-in scroll-effect">
-                    <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
-                    <h3><?php the_title(); ?></h3>
-                    <p><?php echo get_the_date('Y'); ?></p>
+                    <a href="<?php echo get_permalink($project_id); ?>" class="project-link">
+                        <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
+                        </a>
+                        <h3><?php the_title(); ?></h3>
+                        <p><?php echo get_the_date('Y'); ?></p>
+                    
                 </div>
         <?php
             endif;
@@ -64,6 +59,7 @@
         ?>
     </div>
 </section>
+
 
 
     <!-- Slideshow Section -->
@@ -86,8 +82,8 @@
             ?>
                 <div class="slide">
                     <!-- Display the featured image of the project -->
-                    <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
-                    <p><?php the_title(); ?> - Completed in <?php echo get_the_date('Y'); ?></p>
+                    <a href="<?php echo get_permalink($project_id); ?>" class="project-link"><img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
+                    <p><?php the_title(); ?> - Completed in <?php echo get_the_date('Y'); ?></p></a>
                 </div>
             <?php
                 endwhile;
@@ -169,86 +165,16 @@
 </section>
 <?php endif; ?>
 
-<!-- Apartments Section (After Job Opportunity) -->
-<section id="luxury-apartments" class="fade-in scroll-effect">
-    <div class="container">
-        <h2 class="section-title">Luxury Apartments for Sale</h2>
-        <p class="section-description">Discover stunning apartments in Sweden. Browse available options below.</p>
-        
-        <div class="apartments-gallery">
-            <?php
-            // Fetch selected apartments from the customizer
-            $featured_apartments = array(
-                get_theme_mod('featured_apartment_1'),
-                get_theme_mod('featured_apartment_2'),
-                get_theme_mod('featured_apartment_3'),
-            );
-
-            foreach ($featured_apartments as $apartment_id) :
-                if ($apartment_id) :
-                    $post = get_post($apartment_id);
-                    setup_postdata($post);
-                    
-                    // Get apartment meta values
-                    $city = get_post_meta($apartment_id, 'apartment_city', true) ?: 'N/A';
-                    $rooms = get_post_meta($apartment_id, 'apartment_rooms', true) ?: 'N/A';
-                    $size = get_post_meta($apartment_id, 'apartment_size', true) ?: 'N/A';
-                    $price = get_post_meta($apartment_id, 'apartment_price', true);
-                    $status = get_post_meta($apartment_id, 'apartment_status', true) ?: 'forsale';
-
-                    // Format price if it exists
-                    $formatted_price = $price ? number_format((float) $price) . ' SEK' : 'Price Not Available';
-            ?>
-                    <div class="apartment-item <?php echo $status === 'sold' ? 'sold' : ''; ?>">
-                        <div class="ribbon"><?php echo ucfirst($status); ?></div>
-                        <img src="<?php echo get_the_post_thumbnail_url($apartment_id); ?>" alt="<?php the_title(); ?>">
-                        <div class="overlay">
-                            <h3><?php the_title(); ?>, <?php echo ucfirst($city); ?></h3>
-                            <p><?php echo $rooms; ?> Rooms • <?php echo $size; ?> sqm</p>
-                            <p>Price: <?php echo $formatted_price; ?></p>
-                        </div>
-                    </div>
-            <?php
-                endif;
-            endforeach;
-            wp_reset_postdata();
-            ?>
-        </div>
-    </div>
-        </section>
+<?php
+    // Include the Luxury Apartments section
+    get_template_part('template-parts/luxury-apartments');
+?>
 
 
     
 
-   <!-- Contact Section -->
-<section id="contact" class="contact">
-<h2 class="slide-in"><?php echo get_theme_mod('contact_section_title', 'Contact Us'); ?></h2>
-    <div class="contact-wrapper scroll-effect">
-        <div class="contact-info">
-            <div class="overlay"></div>
-            <div class="contact-content">
-                <p><strong>Email:</strong> <?php echo get_theme_mod('contact_email', 'info@construction.com'); ?></p>
-                <p><strong>Phone:</strong> <?php echo get_theme_mod('contact_phone', '+123 456 7890'); ?></p>
-                <p><?php echo get_theme_mod('contact_text', 'Reach out for inquiries, collaborations, or support!'); ?></p>
-            </div>
-        </div>
-        <form action="#" method="post" class="contact-form scroll-effect">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" required></textarea>
-            <button type="submit" class="btn">Send Message</button>
-        </form>
-    </div>
-</section>
 
 
 
-    
 
-<footer>
-    <p><?php echo get_theme_mod('footer_text', '&copy; 2024 Construction Company. All Rights Reserved.'); ?></p>
-</footer>
-
-    <?php wp_footer(); ?>
-</body>
-</html>
+<?php get_footer(); ?>
