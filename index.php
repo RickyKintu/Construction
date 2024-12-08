@@ -82,8 +82,10 @@
             ?>
                 <div class="slide">
                     <!-- Display the featured image of the project -->
-                    <a href="<?php echo get_permalink($project_id); ?>" class="project-link"><img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
-                    <p><?php the_title(); ?> - Completed in <?php echo get_the_date('Y'); ?></p></a>
+                    <a href="<?php echo esc_url(get_permalink()); ?>" class="project-link">
+                        <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
+                        <p><?php echo esc_html(get_the_title()); ?> - Completed in <?php echo esc_html(get_the_date('Y')); ?></p>
+                    </a>
                 </div>
             <?php
                 endwhile;

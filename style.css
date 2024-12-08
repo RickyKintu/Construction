@@ -1430,7 +1430,11 @@ footer {
 }
 
 
+
+
 /* Responsive Styles */
+
+
 
 @media (max-width: 1250px) {
     .broker-card img {
@@ -1496,3 +1500,111 @@ footer {
 
 }
 
+/* Responsive adjustments for gallery-info-container */
+@media (max-width: 768px) {
+    .gallery-info-container {
+        flex-direction: column; /* Stack sections vertically */
+        gap: 1rem;
+    }
+
+
+ .apartment-page .thumbnails {
+        width: 100%;
+        display: flex; /* Make thumbnails horizontal */
+        flex-direction: row; /* Arrange thumbnails in a row */
+        gap: 10px; /* Space between thumbnails */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        max-width: 100%; /* Ensure it doesn’t exceed container width */
+        justify-content: center; /* Center align thumbnails */
+        padding: 10px 0; /* Add padding around thumbnails */
+
+    }
+
+    .apartment-page  .thumbnails img {
+        width: 60px; /* Smaller thumbnails for mobile */
+        height: 60px;
+    }
+
+    .apartment-page .main-image {
+        width: 100%;
+        max-width: 100%;
+        text-align: center; /* Center the main image */
+    }
+
+    .apartment-page .main-image img {
+        width: 100%;
+        max-width: 100%; /* Ensure image fits the screen */
+        height: auto;
+    }
+
+    .apartment-page .quick-info-container {
+        width: 100%;
+        max-width: 100%; /* Allow quick info to take full width */
+        height: 300px; 
+    }
+
+    .apartment-page  #map {
+        height: 300px; /* Adjust map height for smaller screens */
+    }
+}
+
+/* Responsive Styles for Bookings Section */
+@media (max-width: 768px) {
+    /* Showings Section */
+    .showings {
+        padding: 1rem;
+    }
+
+    .showing {
+        flex-direction: column; /* Stack details vertically */
+        align-items: flex-start; /* Align content to the left */
+        gap: 1rem; /* Add space between sections */
+    }
+
+    .showing .details {
+        flex-direction: column; /* Stack details vertically */
+        width: 100%; /* Make details take full width */
+        text-align: left; /* Align text to the left */
+    }
+
+    .showing .book-btn {
+        width: 100%; /* Full-width button */
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    /* Brokers Section */
+    .brokers .broker-cards {
+        flex-direction: column; /* Stack broker cards vertically */
+        gap: 1rem; /* Add space between broker cards */
+    }
+
+    .broker-card {
+        flex-direction: column; /* Stack image and details vertically */
+        align-items: center; /* Center content */
+        text-align: center; /* Center-align text */
+        max-width: 100%; /* Full width */
+    }
+
+    .broker-card img {
+        width: 80%; /* Scale image for smaller screens */
+        max-width: 150px; /* Limit maximum size */
+        margin-bottom: 1rem;
+    }
+
+    .broker-details {
+        width: 100%; /* Take full width for details */
+    }
+
+    .broker-details p {
+        font-size: 0.9rem; /* Adjust font size for better readability */
+    }
+
+    .broker-details h4 {
+        font-size: 1.2rem; /* Slightly smaller name text */
+    }
+
+    .broker-details .role {
+        margin-bottom: 0.5rem;
+    }
+}
